@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Pool } = require ('pg');
 const bcrypt = require("bcryptjs");
+const verifyToken = require('../middleware/auth');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -21,7 +22,7 @@ function generateCode(length = 8) {
   return code;
 }
 
-router.post("/save", async (req, res) => {
+router.post("/save", verifyToken, async (req, res) => {
   const { productName, manufacturer, dateCreated, dateExpired ,description } = req.body;
 
   // Debug incoming payload

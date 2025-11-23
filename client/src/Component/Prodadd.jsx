@@ -1,4 +1,5 @@
-import React, { useState,} from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Prodadd = () => {
     
@@ -11,6 +12,7 @@ const Prodadd = () => {
   });
   const [generatedCode, setGeneratedCode] = useState('');
   const [showCode, setShowCode] = useState(false);
+  const navigate = useNavigate();
   
 
   const handleChange = (e) => {
@@ -24,18 +26,39 @@ const Prodadd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (!token) {
+        // not authenticated — redirect to login
+        navigate('/login');
+        return;
+      }
+
       const res = await fetch('http://localhost:5000/api/save', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({...formData})
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ ...formData })
       });
+
+      if (res.status === 401) {
+        // token invalid or expired
+        navigate('/login');
+        return;
+      }
+
       const data = await res.json();
       if (res.ok) {
         setGeneratedCode(data.code);
         setShowCode(true);
+      } else {
+        console.error('Save failed:', data);
+        alert(data.message || 'Failed to save product');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert('Error submitting form');
     }
   };
 

@@ -42,6 +42,18 @@ const Login = () => {
       console.log("Response body:", data);
       if (result.ok) {
         setMessage("Login successful!");
+        // store token for authenticated requests
+        if (data && data.token) {
+          try {
+            if (rememberMe) {
+              localStorage.setItem('token', data.token);
+            } else {
+              sessionStorage.setItem('token', data.token);
+            }
+          } catch (err) {
+            console.warn('Failed to store token', err);
+          }
+        }
         // Navigate to home/dashboard after a short delay so the user sees the success message
         timeoutRef.current = setTimeout(() => {
           navigate("/product");
