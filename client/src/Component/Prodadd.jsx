@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Prodadd = () => {
     
@@ -33,7 +34,7 @@ const Prodadd = () => {
         return;
       }
 
-      const res = await fetch('http://localhost:5000/api/save', {
+      const res = axios.get('https://prod-backend-1.onrender.com/save', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

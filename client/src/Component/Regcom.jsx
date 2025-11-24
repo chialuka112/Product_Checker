@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 const Regcom = () => {
         const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
   // Add your submission logic here
    
   try {
-    const result = await fetch("http://localhost:5000/api/signup", {
+    const result = axios.get("https://prod-backend-1.onrender.com/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

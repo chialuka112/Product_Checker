@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 const Checkprod = () => {
      const [inputCode, setInputCode] = useState('');
@@ -30,7 +31,7 @@ const Checkprod = () => {
 
     try {
       // NOTE: use http and the same host/port your server runs on
-      const res = await fetch(`http://localhost:5000/api/product/${inputCode}`);
+      const res = axios.get(`https://prod-backend-1.onrender.com/product/${inputCode}`);
 
       if (!res.ok) {
         const errBody = await res.json().catch(() => ({}));
