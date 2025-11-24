@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
   // Add your submission logic here
    
   try {
-    const result = axios.get("https://prod-backend-1.onrender.com/signup", {
+    const result = axios.post("https://prod-backend-1.onrender.com/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

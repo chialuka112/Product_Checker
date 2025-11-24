@@ -33,7 +33,7 @@ const Login = () => {
     console.log('Sign in submitted:', { ...formData, rememberMe });
     // Add your authentication logic here
     try {
-      const result = axios.get("https://prod-backend-1.onrender.com/login", {
+      const result = axios.post("https://prod-backend-1.onrender.com/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
