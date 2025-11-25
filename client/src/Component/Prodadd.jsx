@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 const Prodadd = () => {
     
@@ -34,7 +34,7 @@ const Prodadd = () => {
         return;
       }
 
-      const res = axios.post('https://prod-backend-3gnb.onrender.com/api/save', {
+      const res = await fetch('https://prod-backend-3gnb.onrender.com/api/save', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
