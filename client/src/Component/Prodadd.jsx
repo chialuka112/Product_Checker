@@ -34,7 +34,7 @@ const Prodadd = () => {
         return;
       }
 
-      const res = axios.post('https://prod-backend-1.onrender.com/api/save', {
+      const res = axios.post('https://prod-backend-3gnb.onrender.com/api/save', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

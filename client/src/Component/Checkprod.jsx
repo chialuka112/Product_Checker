@@ -31,7 +31,7 @@ const Checkprod = () => {
 
     try {
       // NOTE: use http and the same host/port your server runs on
-      const res = axios.get(`https://prod-backend-1.onrender.com/api/product/${inputCode}`);
+      const res = axios.get(`https://prod-backend-3gnb.onrender.com/api/product/${inputCode}`);
 
       if (!res.ok) {
         const errBody = await res.json().catch(() => ({}));
